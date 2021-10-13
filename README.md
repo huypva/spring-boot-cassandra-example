@@ -9,7 +9,7 @@ The example project for StringBoot service
 ## Project structure
 ```
 .
-├── hello-world
+├── spring-boot-cassandra
 │   ├── Dockerfile
 │   ...
 ├── docker-compose.yaml
@@ -36,7 +36,7 @@ $ docker-compose -f ./docker-compose-infrastructure.yml -p spring-boot-infrastru
 - Build project
 ```shell script
 $ ./mvnw clean package
-$ cd hello-word
+$ cd spring-boot-cassandra
 $ ../mvnw spring-boot:run
 ...
 ```
