@@ -1,20 +1,20 @@
 package io.codebyexample.springbootcassandra.entrypoint;
 
-import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import io.codebyexample.springbootcassandra.core.entity.Greeting;
 import io.codebyexample.springbootcassandra.core.usecase.GreetUseCase;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
  * @author huypva
@@ -30,16 +30,16 @@ class ControllerTest {
 
   @Test
   void greet() throws Exception {
-    String api = "/greet?name=World";
-    Greeting greeting = new Greeting(1, "Hello World!");
+    String api = "/greet?user_id=1";
+    Greeting greeting = new Greeting(1L, "Hello Nguyen Van A!");
 
-    given(greetUseCase.greet("World")).willReturn(greeting);
+    given(greetUseCase.greet(1L)).willReturn(greeting);
 
-    ResultActions resultActions = mockMvc.perform(get(api))
+    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(api))
         .andDo(print());
 
-    resultActions.andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(greeting.getId())))
-        .andExpect(jsonPath("$.message", is(greeting.getMessage())));
+    resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+//        .andExpect(MockMvcResultMatchers.jsonPath("$.userId", Matchers.is(greeting.getUserId())))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is(greeting.getMessage())));
   }
 }

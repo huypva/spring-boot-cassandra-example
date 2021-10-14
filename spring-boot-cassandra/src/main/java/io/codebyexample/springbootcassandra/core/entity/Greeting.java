@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Greeting {
 
-  private int id;
+  private long userId;
   private String message;
 
 }

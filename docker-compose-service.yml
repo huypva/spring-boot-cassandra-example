@@ -1,8 +1,8 @@
 version: "3.4"
 services:
-  hello-world:
-    build: hello-world
-    container_name: 'hello-world'
+  spring-boot-cassandra:
+    build: spring-boot-cassandra
+    container_name: 'spring-boot-cassandra'
     environment:
       - spring_profiles_active=docker
     ports:

@@ -17,7 +17,7 @@ public class Controller {
   GreetUseCase greetUseCase;
 
   @GetMapping("/greet")
-  public Greeting greet(@RequestParam(name = "name") String name) {
-    return greetUseCase.greet(name);
+  public Greeting greet(@RequestParam(name = "user_id") long userId) {
+    return greetUseCase.greet(userId);
   }
 }

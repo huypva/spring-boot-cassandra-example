@@ -7,5 +7,5 @@ import io.codebyexample.springbootcassandra.core.entity.Greeting;
  */
 public interface GreetUseCase {
 
-  Greeting greet(String name);
+  Greeting greet(long userId);
 }

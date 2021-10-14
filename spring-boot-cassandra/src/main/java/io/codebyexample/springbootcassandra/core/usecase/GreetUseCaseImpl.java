@@ -1,7 +1,8 @@
 package io.codebyexample.springbootcassandra.core.usecase;
 
 import io.codebyexample.springbootcassandra.core.entity.Greeting;
-import io.codebyexample.springbootcassandra.dataprovider.id.IdProvider;
+import io.codebyexample.springbootcassandra.dataprovider.cassandra.UserEntity;
+import io.codebyexample.springbootcassandra.dataprovider.cassandra.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class GreetUseCaseImpl implements GreetUseCase {
 
   @Autowired
-  IdProvider idProvider;
+  UserRepository userRepository;
 
   @Override
-  public Greeting greet(String name) {
-    int randId = idProvider.genId();
-    return new Greeting(randId, String.format("Hello %s!", name));
+  public Greeting greet(long userId) {
+    UserEntity userEntity = userRepository.findById(userId).get();
+    return new Greeting(userEntity.getUserId(), String.format("Hello %s!", userEntity.getUserName()));
   }
 }
